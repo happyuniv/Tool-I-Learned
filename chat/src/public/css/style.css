@@ -15,13 +15,49 @@ body {
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   height: 100vh;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 200px 0;
+  width: 360px;
+}
+
+.name h1 {
+  font-size: 30px;
+  color: gray;
+}
+.name form {
+  margin: 25px 0;
+}
+.name input {
+  padding: 10px;
+  width: 100%;
+  font-size: 20px;
+}
+.name button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.name button:hover {
+  color: black;
+  background-color: white;
 }
 
 .chat {
   display: flex;
   flex-direction: column;
+  margin: auto 0;
   width: 360px;
   height: 80%;
 }

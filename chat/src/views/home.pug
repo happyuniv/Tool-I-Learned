@@ -9,7 +9,12 @@ html(lang="en")
     body 
         header 
         main
-            div.chat
+            div.name
+                h1 Set your name !
+                form
+                    input(type='text' placeholder='Type nickname here' required)
+                    button Enter Room
+            div.chat(hidden)
                 ul
                 form
                     input(type='text' placeholder='Type message here')

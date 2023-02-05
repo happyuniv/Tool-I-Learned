@@ -19,9 +19,16 @@ const io = new Server(httpServer, {
 io.on('connection', (socket) => {
   console.log('connected')
   socket.nickName = 'anonymous'
-  socket.join('room')
-  socket.emit('initial_enter_room')
-  socket.to('room').emit('enter_room', socket.nickName)
+
+  socket.on('name', (name) => {
+    socket.nickName = name
+  })
+
+  socket.on('enter_room', () => {
+    socket.join('room')
+    socket.emit('initial_enter_room')
+    socket.to('room').emit('enter_room', socket.nickName)
+  })
 
   socket.on('send_message', (msg) => {
     socket.to('room').emit('receive_message', msg)

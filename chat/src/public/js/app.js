@@ -1,5 +1,9 @@
 const socket = io()
 
+const name_container = document.querySelector('.name')
+const name_form = document.querySelector('.name form')
+
+const chat_container = document.querySelector('.chat')
 const chat = document.querySelector('.chat ul')
 const chat_form = document.querySelector('.chat form')
 
@@ -46,6 +50,16 @@ socket.on('leave_room', (nickName) => {
   inform.textContent = `${nickName} leaved the room`
 
   chat.appendChild(inform)
+})
+
+name_form.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const input = document.querySelector('.name input')
+  socket.emit('name', input.value)
+  socket.emit('enter_room')
+  name_container.hidden = true
+  chat_container.hidden = false
 })
 
 chat_form.addEventListener('submit', (e) => {
