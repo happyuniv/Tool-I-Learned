@@ -17,7 +17,19 @@ const io = new Server(httpServer, {
 })
 
 io.on('connection', (socket) => {
-  // ...
+  console.log('connected')
+  socket.nickName = 'anonymous'
+  socket.join('room')
+  socket.emit('initial_enter_room')
+  socket.to('room').emit('enter_room', socket.nickName)
+
+  socket.on('send_message', (msg) => {
+    socket.to('room').emit('receive_message', msg)
+  })
+  socket.on('disconnect', () => {
+    socket.to('room').emit('leave_room', socket.nickName)
+    console.log('user disconnected')
+  })
 })
 
 httpServer.listen(3000)
