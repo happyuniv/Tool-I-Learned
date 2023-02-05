@@ -1,8 +1,7 @@
 const socket = io()
 
-const chat = document.querySelector('.chat')
-const form = document.querySelector('.form')
-const input = document.querySelector('.input')
+const chat = document.querySelector('.chat ul')
+const chat_form = document.querySelector('.chat form')
 
 const weekday = [
   'Sunday',
@@ -49,9 +48,12 @@ socket.on('leave_room', (nickName) => {
   chat.appendChild(inform)
 })
 
-form.addEventListener('submit', (e) => {
+chat_form.addEventListener('submit', (e) => {
   e.preventDefault()
+
+  const input = document.querySelector('.chat input')
   socket.emit('send_message', input.value)
+
   const message = document.createElement('li')
   message.classList.add('message', 'me')
   message.textContent = input.value
