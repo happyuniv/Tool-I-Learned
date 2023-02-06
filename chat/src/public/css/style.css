@@ -83,9 +83,12 @@ main {
 .chat ul::-webkit-scrollbar-track {
   background-color: transparent;
 }
+.chat li {
+  display: flex;
+  justify-content: center;
+}
 
-.chat .time {
-  align-self: center;
+.chat li .time {
   margin: 5px 0;
   padding: 5px 10px;
   border-radius: 10px;
@@ -93,32 +96,56 @@ main {
   background-color: white;
 }
 
-.chat .inform {
-  align-self: center;
-  padding: 5px 10px;
+.chat li .inform {
+  margin: 5px 0;
   font-size: 14px;
   color: gray;
 }
 
-.chat .message {
-  flex-basis: 25px;
-  flex-shrink: 0;
+.chat li .message {
   margin: 5px 5px;
   padding: 5px 10px;
-  min-width: 25px;
+  min-width: 35px;
   max-width: 60%;
-  border-radius: 1.125rem 1.125rem 1.125rem 0;
+  min-height: 35px;
   overflow-wrap: break-word;
 }
 
-.chat .me {
+.chat li .timestamp {
   align-self: flex-end;
+  font-size: 10px;
+  color: gray;
+  background-color: transparent;
+}
+
+.chat .me {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px 5px;
+}
+
+.chat .me .message {
   border-radius: 1.125rem 1.125rem 0 1.125rem;
   color: white;
-  background-color: black;
+  background-color: #333;
 }
+
 .chat .other {
-  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 5px;
+}
+
+.chat .other .chatName {
+  font-size: 12px;
+}
+.chat .other .wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.chat .other .message {
+  border-radius: 0 1.125rem 1.125rem 1.125rem;
   background-color: white;
 }
 

@@ -18,23 +18,22 @@ const io = new Server(httpServer, {
 
 io.on('connection', (socket) => {
   console.log('connected')
-  socket.nickName = 'anonymous'
 
   socket.on('name', (name) => {
-    socket.nickName = name
+    socket.name = name
   })
 
   socket.on('enter_room', () => {
     socket.join('room')
     socket.emit('initial_enter_room')
-    socket.to('room').emit('enter_room', socket.nickName)
+    socket.to('room').emit('enter_room', socket.name)
   })
 
   socket.on('send_message', (msg) => {
-    socket.to('room').emit('receive_message', msg)
+    socket.to('room').emit('receive_message', msg, socket.name)
   })
   socket.on('disconnect', () => {
-    socket.to('room').emit('leave_room', socket.nickName)
+    socket.to('room').emit('leave_room', socket.name)
     console.log('user disconnected')
   })
 })
