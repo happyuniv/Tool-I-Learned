@@ -1,12 +1,12 @@
-import { Button } from "@material-ui/core";
-import styled from "styled-components";
-import { CartItemType } from "../App";
+import { Button } from '@mui/material'
+import styled from 'styled-components'
+import { CartItemType } from '../App'
 
 type Props = {
-  item: CartItemType;
-  addToCart: (clickedItem: CartItemType) => void;
-  removeFromCart: (id: number) => void;
-};
+  item: CartItemType
+  addToCart: (clickedItem: CartItemType) => void
+  removeFromCart: (id: number) => void
+}
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -26,30 +26,30 @@ const Wrapper = styled.div`
     object-fit: cover;
     margin-left: 40px;
   }
-`;
+`
 
 const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
   <Wrapper>
     <div>
       <h3>{item.title}</h3>
-      <div className="information">
+      <div className='information'>
         <p>Price: ${item.price}</p>
         <p>Total: ${(item.amount * item.price).toFixed(2)}</p>
       </div>
-      <div className="buttons">
+      <div className='buttons'>
         <Button
-          size="small"
+          size='small'
           disableElevation
-          variant="contained"
+          variant='contained'
           onClick={() => removeFromCart(item.id)}
         >
           -
         </Button>
         <span>{item.amount}</span>
         <Button
-          size="small"
+          size='small'
           disableElevation
-          variant="contained"
+          variant='contained'
           onClick={() => addToCart(item)}
         >
           +
@@ -58,5 +58,5 @@ const CartItem = ({ item, addToCart, removeFromCart }: Props) => (
     </div>
     <img src={item.image} alt={item.title} />
   </Wrapper>
-);
-export default CartItem;
+)
+export default CartItem

@@ -1,21 +1,18 @@
-import { useState } from "react";
-import styled from "styled-components";
-import { CartItemType } from "../App";
-import CartItem from "./CartItem";
+import styled from 'styled-components'
+import { CartItemType } from '../App'
+import CartItem from './CartItem'
 
 type props = {
-  cartItems: CartItemType[];
-  addToCart: (clickedItem: CartItemType) => void;
-  removeFromCart: (id: number) => void;
-};
+  cartItems: CartItemType[]
+  addToCart: (clickedItem: CartItemType) => void
+  removeFromCart: (id: number) => void
+}
 const Wrapper = styled.aside`
   font-family: Arial, Helvetica, sans-serif;
   width: 500px;
   padding: 20px;
-`;
+`
 const Cart = ({ cartItems, addToCart, removeFromCart }: props) => {
-  const [totalPrice, setTotalPrice] = useState(0);
-
   return (
     <Wrapper>
       <h2>Cart</h2>
@@ -32,7 +29,7 @@ const Cart = ({ cartItems, addToCart, removeFromCart }: props) => {
         ))
       )}
     </Wrapper>
-  );
-};
+  )
+}
 
-export default Cart;
+export default Cart

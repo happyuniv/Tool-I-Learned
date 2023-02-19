@@ -1,11 +1,11 @@
-import { Button } from "@material-ui/core";
-import styled from "styled-components";
-import { CartItemType } from "../App";
+import { Button } from '@mui/material'
+import styled from 'styled-components'
+import { CartItemType } from '../App'
 
 type Props = {
-  item: CartItemType;
-  handleAddToCart: (clickedItem: CartItemType) => void;
-};
+  item: CartItemType
+  handleAddToCart: (clickedItem: CartItemType) => void
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
     padding: 1rem;
     height: 100%;
   }
-`;
+`
 
 const Item = ({ item, handleAddToCart }: Props) => (
   <Wrapper>
@@ -43,6 +43,6 @@ const Item = ({ item, handleAddToCart }: Props) => (
     </div>
     <Button onClick={() => handleAddToCart(item)}>Add to cart</Button>
   </Wrapper>
-);
+)
 
-export default Item;
+export default Item
