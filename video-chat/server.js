@@ -12,6 +12,29 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html')
 })
 
-server.listen('3000', () => {
-  console.log('server running')
+io.on('connection', (socket) => {
+  console.log('a user connected')
+
+  socket.on('name', (name) => {
+    socket.name = name
+  })
+
+  socket.on('enter_room', () => {
+    socket.join('room')
+    socket.to('room').emit('enter_room')
+  })
+
+  socket.on('offer', (offer) => {
+    socket.to('room').emit('offer', offer)
+  })
+
+  socket.on('answer', (answer) => {
+    socket.to('room').emit('answer', answer)
+  })
+
+  socket.on('ice', (candidate) => {
+    socket.to('room').emit('ice', candidate)
+  })
 })
+
+server.listen('3000')

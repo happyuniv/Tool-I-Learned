@@ -10,9 +10,26 @@
   <body>
     <header></header>
     <main>
-      <video class="face" width="400px" height="400px" autoplay />
+      <div class="name">
+        <h1>Set your name!</h1>
+        <form>
+          <input type="text" placeholder="Type name here" required />
+          <button>Enter Room</button>
+        </form>
+      </div>
+
+      <div class="video-chat" hidden>
+        <div>
+          <h1>peer</h1>
+          <video class="peer-face" width="400px" autoplay />
+        </div>
+        <div>
+          <h1>me</h1>
+          <video class="my-face" width="300px" autoplay />
+        </div>
+      </div>
     </main>
-    <script src="app.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
