@@ -19,11 +19,18 @@ const configuration = {
   ],
 }
 const peerConnection = new RTCPeerConnection(configuration)
+const mediaNameSet = {}
+let user
+let streamId
+let peerStream
 
 nameForm.addEventListener('submit', async (e) => {
   e.preventDefault()
 
   const input = document.querySelector('.name input')
+  user = input.value
+  const myName = document.querySelector('.video-chat .me')
+  myName.textContent = user
   socket.emit('name', input.value)
 
   try {
@@ -31,23 +38,32 @@ nameForm.addEventListener('submit', async (e) => {
       video: true,
       audio: true,
     })
-    const tracks = stream.getTracks()
+    streamId = stream.id
     myFace.srcObject = stream
+    mediaNameSet[stream.id] = input.value
+    const tracks = stream.getTracks()
     tracks.map((track) => {
       peerConnection.addTrack(track, stream)
     })
-    socket.emit('enter_room')
+    socket.emit('enter_room', streamId, user)
     nameContainer.hidden = true
   } catch (error) {
     console.error('Error accessing media devices.', error)
   }
 })
 
-socket.on('enter_room', async () => {
+socket.on('enter_room', async (_streamId, _user) => {
+  mediaNameSet[_streamId] = _user
+  socket.emit('send_info', streamId, user)
+
   const offer = await peerConnection.createOffer()
   await peerConnection.setLocalDescription(offer)
   socket.emit('offer', offer)
   console.log('send offer!')
+})
+
+socket.on('update_users', (_streamId, _user) => {
+  mediaNameSet[_streamId] = _user
 })
 
 socket.on('offer', async (offer) => {
@@ -72,7 +88,7 @@ peerConnection.addEventListener('icecandidate', (event) => {
   }
 })
 
-socket.on('ice', async (candidate, name) => {
+socket.on('ice', async (candidate) => {
   if (candidate) {
     try {
       await peerConnection.addIceCandidate(candidate)
@@ -86,11 +102,14 @@ socket.on('ice', async (candidate, name) => {
 peerConnection.addEventListener('connectionstatechange', (event) => {
   if (peerConnection.connectionState === 'connected') {
     // Peers connected!
+    const peerName = document.querySelector('.video-chat .peer')
+    peerName.textContent = mediaNameSet[peerStream.id]
+    peerFace.srcObject = peerStream
+    videoChat.hidden = false
     console.log('connectionstatechange!', event)
   }
 })
 
 peerConnection.addEventListener('track', async (event) => {
-  videoChat.hidden = false
-  peerFace.srcObject = event.streams[0]
+  peerStream = event.streams[0]
 })

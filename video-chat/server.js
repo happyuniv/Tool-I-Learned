@@ -19,9 +19,13 @@ io.on('connection', (socket) => {
     socket.name = name
   })
 
-  socket.on('enter_room', () => {
+  socket.on('enter_room', (streamId,user) => {
     socket.join('room')
-    socket.to('room').emit('enter_room')
+    socket.to('room').emit('enter_room',streamId,user)
+  })
+
+  socket.on('send_info', (streamId, user) => {
+    io.to('room').emit('update_users', streamId, user)
   })
 
   socket.on('offer', (offer) => {
