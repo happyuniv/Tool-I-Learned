@@ -7,6 +7,9 @@ const videoChat = document.querySelector('.video-chat')
 const myFace = document.querySelector('.video-chat .my-face')
 const peerFace = document.querySelector('.video-chat .peer-face')
 
+const videoBtn = document.querySelector('.video-chat .video-icon')
+const micBtn = document.querySelector('.video-chat .mic-icon')
+
 const configuration = {
   iceServers: [
     {
@@ -22,14 +25,17 @@ const peerConnection = new RTCPeerConnection(configuration)
 const mediaNameSet = {}
 let user
 let streamId
+let myStream
 let peerStream
+let videoOff = false
+let mute = false
 
 nameForm.addEventListener('submit', async (e) => {
   e.preventDefault()
 
   const input = document.querySelector('.name input')
   user = input.value
-  const myName = document.querySelector('.video-chat .me')
+  const myName = document.querySelector('.me h1')
   myName.textContent = user
   socket.emit('name', input.value)
 
@@ -38,6 +44,7 @@ nameForm.addEventListener('submit', async (e) => {
       video: true,
       audio: true,
     })
+    myStream = stream
     streamId = stream.id
     myFace.srcObject = stream
     mediaNameSet[stream.id] = input.value
@@ -102,7 +109,7 @@ socket.on('ice', async (candidate) => {
 peerConnection.addEventListener('connectionstatechange', (event) => {
   if (peerConnection.connectionState === 'connected') {
     // Peers connected!
-    const peerName = document.querySelector('.video-chat .peer')
+    const peerName = document.querySelector('.peer h1')
     peerName.textContent = mediaNameSet[peerStream.id]
     peerFace.srcObject = peerStream
     videoChat.hidden = false
@@ -112,4 +119,18 @@ peerConnection.addEventListener('connectionstatechange', (event) => {
 
 peerConnection.addEventListener('track', async (event) => {
   peerStream = event.streams[0]
+})
+
+videoBtn.addEventListener('click', () => {
+  videoOff = !videoOff
+
+  videoBtn.textContent = videoOff ? 'videocam_off' : 'videocam'
+  myStream.getVideoTracks().forEach((track) => (track.enabled = !track.enabled))
+})
+
+micBtn.addEventListener('click', () => {
+  mute = !mute
+
+  micBtn.textContent = mute ? 'mic_off' : 'mic'
+  myStream.getAudioTracks().forEach((track) => (track.enabled = !track.enabled))
 })

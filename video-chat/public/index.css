@@ -60,4 +60,27 @@
     justify-content: center;
     align-items: center;
   }
+
+  .video-chat button {
+    border: none;
+    margin: 10px;
+    background-color: transparent;
+  }
+
+  .video-chat .me {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-chat .peer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .video-chat button {
+    cursor: pointer;
+  }
+
   
