@@ -1,6 +1,6 @@
 # Tool-I-Learned
 
-Enjoy leearning tool with simple project
+Enjoy learning tool with simple project
 
 <br>
 
@@ -9,6 +9,7 @@ Enjoy leearning tool with simple project
 - [Shopping Cart](#shopping-cart)
 - [Chat](#chat)
 - [Video Chat](#video-chat)
+- [Next Auth](#next-auth)
 
 <br>
 <hr>
@@ -21,7 +22,7 @@ Enjoy leearning tool with simple project
 
 ### Feature
 
-Add/Remove product to/from cart and easily fetch data and handle loading/error using react-query
+Shopping cart example that fetch data and handle loading/error using react-query
 
 ### Tool
 
@@ -67,5 +68,23 @@ Simple real-time video chat using socket.io and WebRTC
 - WebRTC
 
 [DIRECTORY](./video-chat/)
+
+<br>
+
+## Next Auth
+
+![next-auth](https://github.com/happyuniv/Tool-I-Learned/assets/97126757/010a0f56-b6d6-49d1-8bfe-2b2c32f3b1f4)
+
+### Feature
+
+Next-Auth example application applied to Next.js App Router(Next.js 13)
+
+### Tool
+
+- OAuth2
+- Next.js
+- NextAuth.js
+
+[DIRECTORY](./next-auth/)
 
 <br>
