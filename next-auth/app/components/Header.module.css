@@ -1,0 +1,31 @@
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  background-color: rgba(211, 211, 211, 0.61);
+}
+
+.button__sign {
+  padding: 5px 20px;
+  color: white;
+  font-size: 20px;
+  background-color: black;
+  transition: all 1s;
+}
+
+.button__sign:hover {
+  cursor: pointer;
+  color: black;
+  background-color: white;
+}
+
+.nav {
+  margin: 30px 0;
+}
+.ul {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+}

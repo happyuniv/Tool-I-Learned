@@ -1,0 +1,30 @@
+html,
+* {
+  box-sizing: content-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.avatar {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  background-position: center;
+  background-size: cover;
+}
